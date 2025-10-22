@@ -8,13 +8,13 @@ public class RacingValidator {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("자동차 이름을 입력해야 합니다.");
         }
-        String[] names = input.split(",");
 
-        if (names.length < 2 && !input.contains(" ") && input.matches(".*[^a-zA-Z0-9].*")) {
+        if (!input.contains(",")) {
             throw new IllegalArgumentException("자동차 이름은 쉼표(,)로 구분해야 합니다.");
         }
+        String[] names = input.split(",");
+        Set<String> nameSet = new HashSet<>();
 
-        Set<String> uniqueNames = new HashSet<>();
         for (String name : names) {
             String trimmedName = name.trim();
 
@@ -26,11 +26,11 @@ public class RacingValidator {
                 throw new IllegalArgumentException("자동차 이름은 5자 이하만 가능합니다.");
             }
 
-            if (uniqueNames.contains(trimmedName)) {
-                throw new IllegalArgumentException("같은 이름을 사용할 수 없습니다: " + trimmedName);
+            if (nameSet.contains(trimmedName)) {
+                throw new IllegalArgumentException("자동차 이름이 중복되었습니다: " + trimmedName);
             }
 
-            uniqueNames.add(trimmedName);
+            nameSet.add(trimmedName);
         }
     }
 
