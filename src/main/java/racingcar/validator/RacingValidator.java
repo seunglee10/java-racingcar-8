@@ -1,16 +1,36 @@
 package racingcar.validator;
-import java.util.List;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class RacingValidator {
     public static void validateCarNames(String input) {
         if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException("자동차 이름은 공백일 수 없습니다.");
+            throw new IllegalArgumentException("자동차 이름을 입력해야 합니다.");
         }
         String[] names = input.split(",");
+
+        if (names.length < 2 && !input.contains(" ") && input.matches(".*[^a-zA-Z0-9].*")) {
+            throw new IllegalArgumentException("자동차 이름은 쉼표(,)로 구분해야 합니다.");
+        }
+
+        Set<String> uniqueNames = new HashSet<>();
         for (String name : names) {
-            if (name.length() > 5) {
+            String trimmedName = name.trim();
+
+            if (trimmedName.isEmpty()) {
+                throw new IllegalArgumentException("자동차 이름은 공백일 수 없습니다.");
+            }
+
+            if (trimmedName.length() > 5) {
                 throw new IllegalArgumentException("자동차 이름은 5자 이하만 가능합니다.");
             }
+
+            if (uniqueNames.contains(trimmedName)) {
+                throw new IllegalArgumentException("같은 이름을 사용할 수 없습니다: " + trimmedName);
+            }
+
+            uniqueNames.add(trimmedName);
         }
     }
 
