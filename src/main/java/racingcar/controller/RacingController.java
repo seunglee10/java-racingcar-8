@@ -1,5 +1,10 @@
 package racingcar.controller;
+
+
+import racingcar.model.Cars;
+import racingcar.service.RacingService;
 import racingcar.view.InputView;
+import racingcar.view.OutputView;
 import racingcar.validator.RacingValidator;
 import java.util.List;
 
@@ -7,6 +12,7 @@ import java.util.List;
 public class RacingController {
 
     private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
 
     public void run() {
         // 자동차 이름 입력 + 검증 + 파싱
@@ -19,8 +25,23 @@ public class RacingController {
         RacingValidator.validateAttemptCount(attemptsInput);
         int attempts = RacingValidator.parseAttemptCount(attemptsInput);
 
-        // 여기서 Cars/Service 로직과 연결
+        // Cars/Service 로직과 연결
         System.out.println("입력 완료: " + carNames + ", 시도 횟수: " + attempts);
+
+        // Cars, RacingService 초기화
+        Cars cars = new Cars(carNames);
+        RacingService service = new RacingService(cars, attempts);
+        service.race();
+
+        // 레이스 진행 및 라운드별 출력
+        for (int i = 0; i < attempts; i++) {
+            service.getCars().moveAllCars();
+            outputView.printRoundResult(service.getCars());
+        }
+
+        // 5. 최종 우승자 출력
+        List<String> winners = service.getCars().getWinnerNames();
+        outputView.printWinners(winners);
 
     }
 
