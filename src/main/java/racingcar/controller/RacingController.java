@@ -1,6 +1,8 @@
 package racingcar.controller;
 
 
+import racingcar.validator.AttemptValidator;
+import racingcar.validator.CarsValidator;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
@@ -13,12 +15,12 @@ public class RacingController {
     public void run() {
         // 자동차 이름 입력 + 검증 + 파싱
         String carNamesInput = inputView.carNames();
-//        RacingValidator.validateCarNames(carNamesInput);
+        CarsValidator.validateCarNames(carNamesInput);
 //        List<String> carNames = inputView.parseCarNames(carNamesInput);
 //
-//        // 시도 횟수 입력 + 검증 + 파싱
-//        String attemptsInput = inputView.attemptCount();
-//        RacingValidator.validateAttemptCount(attemptsInput);
+        // 시도 횟수 입력 + 검증 + 파싱
+        String attemptsInput = inputView.attemptCount();
+        AttemptValidator.validateAttemptCount(attemptsInput);
 //        int attempts = RacingValidator.parseAttemptCount(attemptsInput);
 //
 //        // Cars/Service 로직과 연결
