@@ -2,7 +2,6 @@ package racingcar.service;
 
 import racingcar.model.Cars;
 
-
 public class RacingService {
     private final Cars cars;
     private final int attemptCount;

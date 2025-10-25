@@ -16,16 +16,12 @@ public class RacingController {
         // 자동차 이름 입력 + 검증 + 파싱
         String carNamesInput = inputView.carNames();
         CarsValidator.validateCarNames(carNamesInput);
-//        List<String> carNames = inputView.parseCarNames(carNamesInput);
+//        List<String> carNames = CarsParser.parseCarNames(carNamesInput);
 //
         // 시도 횟수 입력 + 검증 + 파싱
         String attemptsInput = inputView.attemptCount();
         AttemptValidator.validateAttemptCount(attemptsInput);
-//        int attempts = RacingValidator.parseAttemptCount(attemptsInput);
-//
-//        // Cars/Service 로직과 연결
-//        System.out.println("입력 완료: " + carNames + ", 시도 횟수: " + attempts);
-//
+
 //        // Cars, RacingService 초기화
 //        Cars cars = new Cars(carNames);
 //        RacingService service = new RacingService(cars, attempts);

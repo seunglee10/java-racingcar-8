@@ -3,7 +3,7 @@ package racingcar.validator;
 import java.util.function.ToDoubleBiFunction;
 
 public class CarsValidator {
-    void validateCarNames(String input) {
+    public static void validateCarNames(String input) {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("자동차 이름은 공백일 수 없습니다.");
         }

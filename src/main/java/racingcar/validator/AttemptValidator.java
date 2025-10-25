@@ -1,7 +1,7 @@
 package racingcar.validator;
 
 public class AttemptValidator{
-    void validateAttemptCount(String input) {
+    public static void validateAttemptCount(String input) {
         try {
             int count = Integer.parseInt(input);
             if (count <= 0) {
@@ -12,7 +12,7 @@ public class AttemptValidator{
         }
     }
 
-    public static int parseAttemptCount(String input) {
+    public int parseAttemptCount(String input) {
         return Integer.parseInt(input);
     }
 }
