@@ -80,8 +80,7 @@ jun : -----
 |--------|-----------------------------|------|
 | 자동차 이름 | 5자 초과                       | `IllegalArgumentException` |
 | 자동차 이름 | 공백 입력                       | `IllegalArgumentException` |
-| 자동차 이름 | 같은 이름 중복 입력                 | `IllegalArgumentException` |
-| 자동차 이름 | 쉼표(,)로 구분하지 않음, 특수문자를 입력한 경우 | `IllegalArgumentException` |
+| 자동차 이름 | 쉼표(,)로 구분하지 않음 | `IllegalArgumentException` |
 | 시도 횟수  | 정수가 아님                      | `IllegalArgumentException` |
 | 시도 횟수  | 음수 또는 0                     | `IllegalArgumentException` |
 

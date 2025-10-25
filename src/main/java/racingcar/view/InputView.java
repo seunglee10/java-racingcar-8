@@ -11,16 +11,16 @@ public class InputView {
         return Console.readLine();
     }
 
-    public String attemptCount() {
-        System.out.println("시도할 횟수는 몇 회인가요?");
-        return Console.readLine();
-    }
-
-    public List<String> parseCarNames(String input) {
-        return Arrays.stream(input.split(","))
-                .map(String::trim)
-                .collect(Collectors.toList());
-    }
+//    public String attemptCount() {
+//        System.out.println("시도할 횟수는 몇 회인가요?");
+//        return Console.readLine();
+//    }
+//
+//    public List<String> parseCarNames(String input) {
+//        return Arrays.stream(input.split(","))
+//                .map(String::trim)
+//                .collect(Collectors.toList());
+//    }
 
 }
 
