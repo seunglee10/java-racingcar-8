@@ -27,6 +27,77 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void raceSingleCarMultipleAttempt() {
+        assertRandomNumberInRangeTest(
+                () -> {
+                    run("pobi,woni", "2");
+                    assertThat(output()).contains("pobi : --", "woni : -", "최종 우승자 : pobi");
+                },
+                MOVING_FORWARD, MOVING_FORWARD, MOVING_FORWARD, STOP
+        );
+    }
+
+    @Test
+    @DisplayName("한 대의 자동차가 참여하고 우승자가 존재하는 경우.")
+    void raceSingleCarSingleWinner() {
+        assertRandomNumberInRangeTest(
+            () -> {
+                run("pobi", "1");
+                assertThat(output()).contains("pobi : -", "최종 우승자 : pobi");
+            },
+            MOVING_FORWARD
+        );
+    }
+
+    @Test
+    @DisplayName("다수의 자동차가 참여하고 한 우승자가 존재하는 경우.")
+    void raceMultipleCarsSingleWinner () {
+        assertRandomNumberInRangeTest(
+                () -> {
+                    run("pobi,woni", "2");
+                    assertThat(output()).contains("pobi : --", "woni : -", "최종 우승자 : pobi");
+                },
+                MOVING_FORWARD, STOP, MOVING_FORWARD,MOVING_FORWARD
+        );
+    }
+
+    @Test
+    @DisplayName("다수의 자동차가 참여하고 다수의 우승자가 존재하는 경우.")
+    void raceMultipleCarsMultipleWinners () {
+        assertRandomNumberInRangeTest(
+                () -> {
+                    run("pobi,woni,jun", "1");
+                    assertThat(output()).contains("pobi : -", "woni : ", "jun : -", "최종 우승자 : pobi, jun");
+                },
+                MOVING_FORWARD, STOP, MOVING_FORWARD
+        );
+    }
+
+    @Test
+    @DisplayName("다수의 자동차가 참여하고 모두 전진한 경우")
+    void raceMultipleCarsAllMove () {
+        assertRandomNumberInRangeTest(
+                () -> {
+                    run("pobi,woni,jun", "2");
+                    assertThat(output()).contains("pobi : --", "woni : --", "jun : --", "최종 우승자 : pobi, woni, jun");
+                },
+                MOVING_FORWARD, MOVING_FORWARD, MOVING_FORWARD, MOVING_FORWARD, MOVING_FORWARD, MOVING_FORWARD
+        );
+    }
+
+    @Test
+    @DisplayName("다수의 자동차가 참여하고 모두 전진하지 않은 경우")
+    void raceMultipleCarsNoMove () {
+        assertRandomNumberInRangeTest(
+                () -> {
+                    run("pobi,woni,jun", "1");
+                    assertThat(output()).contains("pobi : ", "woni : ", "jun : ", "최종 우승자 : pobi, woni, jun");
+                },
+                STOP, STOP, STOP
+        );
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("pobi,javaji", "1"))
@@ -82,14 +153,14 @@ class ApplicationTest extends NsTest {
         );
     }
 
-//    @Test
-//    @DisplayName("시도 횟수가 정수 범위 초과 입력 시 에러 발생")
-//    void NumberShouldThrowException() {
-//        assertSimpleTest(() ->
-//                assertThatThrownBy(() -> runException("pobi", "abc"))
-//                        .isInstanceOf(IllegalArgumentException.class)
-//        );
-//    }
+    @Test
+    @DisplayName("시도 횟수가 정수 범위 초과 입력 시 에러 발생")
+    void ExceedNumberShouldThrowException() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("pobi", "2247483647"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 
     @Test
     @DisplayName("시도 횟수에 숫자가 아닌 문자 입력 시 에러 발생")
@@ -99,40 +170,6 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
-
-
-//    @Test
-//    @DisplayName("자동차 이름 길이 5자 초과 시 에러 발생")
-//    void ShouldThrowException() {
-//        assertSimpleTest(() ->
-//                assertThatThrownBy(() -> runException("pobiiii", "1"))
-//                        .isInstanceOf(IllegalArgumentException.class)
-//        );
-//    }
-
-//    @Test
-//    void race_singleCar_singleAttempt() {
-//        assertRandomNumberInRangeTest(
-//                () -> {
-//                    run("pobi,woni", "1");
-//                    assertThat(output()).contains("pobi : -", "woni : ", "최종 우승자 : pobi");
-//                },
-//                MOVING_FORWARD, STOP
-//        );
-//    }
-//
-//    @Test
-//    void raceSingleCarMultipleAttempt() {
-//        assertRandomNumberInRangeTest(
-//                () -> {
-//                    run("pobi,woni", "2");
-//                    assertThat(output()).contains("pobi : -", "woni : ", "최종 우승자 : pobi");
-//                },
-//                MOVING_FORWARD, STOP, MOVING_FORWARD, STOP
-//        );
-//    }
-//
-
 
 
     @Override
