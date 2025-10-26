@@ -11,8 +11,4 @@ public class AttemptValidator{
             throw new IllegalArgumentException("시도 횟수는 정수만 가능합니다.");
         }
     }
-
-    public int parseAttemptCount(String input) {
-        return Integer.parseInt(input);
-    }
 }

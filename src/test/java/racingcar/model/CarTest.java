@@ -6,11 +6,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CarTest {
     @Test
-    @DisplayName("자동차 전진 시 위치 1 증가")
-    void move_Should_In_crease_Position() {
+    @DisplayName("자동차 이름 생성 테스트")
+    void get_Car_Name() {
         Car car = new Car("pobi");
-        int before = car.getPosition();
-        car.move();
-        assertThat(car.getPosition()).isGreaterThanOrEqualTo(before);
+
+        assertThat(car.getName()).isEqualTo("pobi");
     }
 }
