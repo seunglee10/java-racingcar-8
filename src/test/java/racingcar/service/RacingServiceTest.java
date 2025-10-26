@@ -10,7 +10,7 @@ import java.util.List;
 
 public class RacingServiceTest {
     @Test
-    @DisplayName("race 메서드는 모든 자동차를 시도 횟수만큼 이동시킨다")
+    @DisplayName("race 메서드는 모든 자동차를 시도 횟수만큼 이동")
     void race_Should_Move_AllCars() {
         Cars cars = new Cars(List.of("pobi", "woni"));
         RacingService service = new RacingService(cars, 5);
